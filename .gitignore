@@ -1,0 +1,30 @@
+# Dependencies
+src/.deps
+src/.libs
+src/*.dSYM
+
+# Prerequisites
+src/*.d
+
+# Compiled Object files
+src/*.slo
+src/*.lo
+src/*.o
+src/*.obj
+
+# Compiled Dynamic libraries
+src/*.so
+src/*.dylib
+src/*.dll
+
+# Compiled Static libraries
+src/*.lai
+src/*.la
+src/*.a
+src/*.lib
+
+# Executables
+src/eq2ga
+src/eq2ec
+src/test_ecl2000
+src/test_pm
