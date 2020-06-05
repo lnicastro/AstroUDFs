@@ -1,0 +1,20 @@
+Compiling:
+
+make
+sudo make install
+
+
+Within the MySQL client:
+
+  CREATE FUNCTION skysep RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radec2gl RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radec2gb RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radec2el RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radec2eb RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radecpm2ra RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radecpm2dec RETURNS REAL SONAME 'udf_astro.so';
+  CREATE FUNCTION radec2glgb RETURNS STRING SONAME 'udf_astro.so';
+  CREATE FUNCTION radec2eleb RETURNS STRING SONAME 'udf_astro.so';
+  CREATE FUNCTION radecnow RETURNS STRING SONAME 'udf_astro.so';
+  CREATE FUNCTION rahstr RETURNS STRING SONAME 'udf_astro.so';
+  CREATE FUNCTION decstr RETURNS STRING SONAME 'udf_astro.so';
