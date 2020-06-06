@@ -92,7 +92,7 @@ Galactic longitude from given equatorial J2000 coordinates.
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
-Galactic longitude, in degrees.
+Galactic longitude, in the range [0, 360[ degrees.
 
 **Example:**
 
@@ -115,7 +115,7 @@ Galactic latitude from given equatorial J2000 coordinates.
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
-Galactic latitude, in degrees.
+Galactic latitude, in the range [-90, 90] degrees.
 
 **Example:**
 
@@ -138,7 +138,7 @@ Galactic longitude and latitude from given equatorial J2000 coordinates.
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`STRING`):
-Galactic latitude and longitude, in degrees.
+Galactic longitude and latitude, in the range [0, 360[, [-90, 90] degrees.
 
 **Example:**
 
@@ -161,7 +161,7 @@ Ecliptic longitude from given equatorial J2000 coordinates.
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
-Ecliptic longitude, in degrees.
+Ecliptic longitude, in the range [0, 360[ degrees.
 
 **Example:**
 
@@ -184,7 +184,7 @@ Ecliptic latitude from given equatorial J2000 coordinates.
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
-Ecliptic longitude, in degrees.
+Ecliptic latitude, in the range [-90, 90] degrees.
 
 **Example:**
 
@@ -204,10 +204,10 @@ Ecliptic longitude and latitude from given equatorial J2000 coordinates.
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
 
-*Dec* `DOUBLE` : Object declination (J2000) in degrees;
+*Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`STRING`):
-Ecliptic latitude and longitude, in degrees.
+Ecliptic longitude and latitude, in the range [0, 360[, [-90, 90] degrees.
 
 **Example:**
 
