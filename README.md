@@ -26,7 +26,7 @@ sudo make install
 
 ## UDFs installation
 
-To import UDFs into MySQL (in the directory `sql`):
+To import UDFs into MySQL (from the directory `sql`):
 ```shell
   shell> cd ../sql
   shell> mysql -u root -p
@@ -76,8 +76,6 @@ Angular distance between the points, in arcmin.
 ```sql
 select Sphedist(125.6, -37.5, 121.4, -38.1) as d_arcmin;
 +-------------------+
-| d_arcmin          |
-+-------------------+
 | 202.3282326405512 |
 +-------------------+
 ```
@@ -100,8 +98,6 @@ Galactic longitude, in degrees.
 
 ```sql
 mysql> select radec2gl(320.85, 12.67) as Gl;
-+-------+
-| Gl    |
 +-------+
 | 64.32 |
 +-------+
@@ -126,8 +122,6 @@ Galactic latitude, in degrees.
 ```sql
 mysql> select radec2gb(320.85, 12.67) as Gb;
 +--------+
-| Gb     |
-+--------+
 | -25.75 |
 +--------+
 ```
@@ -150,8 +144,6 @@ Galactic latitude and longitude, in degrees.
 
 ```sql
 mysql> select radec2glgb(320.85, 12.67) as lon_lat;
-+---------------------------------------+
-| lon_lat                               |
 +---------------------------------------+
 | 64.31518160611735, -25.75108845741275 |
 +---------------------------------------+
@@ -176,8 +168,6 @@ Ecliptic longitude, in degrees.
 ```sql
 mysql> select radec2el(320.85, 12.67) as El;
 +--------+
-| El     |
-+--------+
 | 327.73 |
 +--------+
 ```
@@ -201,8 +191,6 @@ Ecliptic longitude, in degrees.
 ```sql
 mysql> select radec2eb(320.85, 12.67) as Eb;
 +-------+
-| Eb    |
-+-------+
 | 26.51 |
 +-------+
 ```
@@ -225,8 +213,6 @@ Ecliptic latitude and longitude, in degrees.
 
 ```sql
 mysql> select radec2eleb(320.85, 12.67) as lon_lat;
-+-------------------------------------+
-| lon_lat                             |
 +-------------------------------------+
 | 327.7266930717887, 26.5073679424105 |
 +-------------------------------------+
@@ -259,8 +245,6 @@ RA at requested epoch, in degrees.
 ```sql
 mysql> select radecpm2ra(46.34573, -89.36417, 127.3, 349.2, 53371.5, 59006.5) as RA_now;
 +----------+
-| RA_now   |
-+----------+
 | 46.39478 |
 +----------+
 ```
@@ -291,8 +275,6 @@ Dec at requested epoch, in degrees.
 
 ```sql
 mysql> select radecpm2dec(46.34573, -89.36417, 127.3, 349.2, 53371.5, 59006.5) as Dec_now;
-+-----------+
-| Dec_now   |
 +-----------+
 | -89.36267 |
 +-----------+
@@ -325,8 +307,6 @@ RA and Dec at requested epoch, in degrees.
 ```sql
 mysql> select radecpmnow(46.34573, -89.36417, 127.3, 349.2, 53371.5, 59006.5);
 +-----------------------------------------------------------------+
-| radecpmnow(46.34573, -89.36417, 127.3, 349.2, 53371.5, 59006.5) |
-+-----------------------------------------------------------------+
 | 46.39477549330486, -89.36267327096959                           |
 +-----------------------------------------------------------------+
 ```
@@ -350,14 +330,10 @@ RA in the format `hh:mm:ss.ss`.
 ```sql
 mysql> select rahstr(12.7891) as RAs;
 +-------------+
-| RAs         |
-+-------------+
 | 12:47:20.76 |
 +-------------+
 
 mysql> select rahstr(12.7891, '') as RAs;
-+-------------+
-| RAs         |
 +-------------+
 | 12 47 20.76 |
 +-------------+
@@ -382,14 +358,10 @@ Dec in the format `+dd:mm:ss.s`.
 ```sql
 mysql> select decstr(-37.289) as Decs;
 +-------------+
-| Decs        |
-+-------------+
 | -37:17:20.4 |
 +-------------+
 
 mysql> select decstr(-37.289, '') as Decs;
-+-------------+
-| Decs        |
 +-------------+
 | -37 17 20.4 |
 +-------------+
@@ -416,14 +388,10 @@ RA and Dec in the format `hh:mm:ss.ss, +dd:mm:ss.s`.
 ```sql
 mysql> select rahdecstr(12.7891, -37.289) as RA_Decs;
 +--------------------------+
-| RA_Decs                  |
-+--------------------------+
 | 12:47:20.76, -37:17:20.4 |
 +--------------------------+
 
 mysql> select decstr(12.7891, -37.289, '') as RA_Decs;
-+--------------------------+
-| RA_Decs                  |
 +--------------------------+
 | 12 47 20.76, -37 17 20.4 |
 +--------------------------+
