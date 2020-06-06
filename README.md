@@ -1,4 +1,4 @@
-# AstroUDF
+# AstroUDFs
 A set of handy astronomical tools for astronomical catalogues hosted on MySQL / MariaDB.
 All implemented as C UDF functions.
 
@@ -90,6 +90,7 @@ Galactic longitude from given equatorial J2000 coordinates.
 `radec2gl(RA, Dec)`
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
@@ -114,6 +115,7 @@ Galactic latitude from given equatorial J2000 coordinates.
 `radec2gb(RA, Dec)`
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
@@ -138,6 +140,7 @@ Galactic longitude and latitude from given equatorial J2000 coordinates.
 `radec2glgb(RA, Dec)`
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`STRING`):
@@ -162,6 +165,7 @@ Ecliptic longitude from given equatorial J2000 coordinates.
 `radec2el(RA, Dec)`
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
@@ -186,6 +190,7 @@ Ecliptic latitude from given equatorial J2000 coordinates.
 `radec2eb(RA, Dec)`
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+
 *Dec* `DOUBLE` : Object declination (J2000) in degrees.
 
 **Return value** (`DOUBLE`):
@@ -210,6 +215,7 @@ Ecliptic longitude and latitude from given equatorial J2000 coordinates.
 `radec2eleb(RA, Dec)`
 
 *RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+
 *Dec* `DOUBLE` : Object declination (J2000) in degrees;
 
 **Return value** (`STRING`):
@@ -234,10 +240,15 @@ Compute right ascension at a given epoch given reference epoch, coordinates and 
 `radecpm2ra(RA, Dec, pmRA, pmDec, catEpoch, reqEpoch)`
 
 *RA* `DOUBLE` : Right ascension at reference epoch, in degrees;
+
 *Dec* `DOUBLE` : Declination at reference epoch, in degrees;
+
 *pmRA* `DOUBLE` : Right ascension proper motion (pmRA x cos(Dec)) at reference epoch, in mas/year;
+
 *pmDec* `DOUBLE` : Declination proper motion reference epoch, in mas/year;
+
 *catEpoch* `DOUBLE` : Reference epoch (e.g. MJD);
+
 *reqEpoch* `DOUBLE` : Requested epoch.
 
 **Return value** (`DOUBLE`):
@@ -262,10 +273,15 @@ Compute declination at a given epoch given reference epoch, coordinates and prop
 `radecpm2dec(RA, Dec, pmRA, pmDec, catEpoch, reqEpoch)`
 
 *RA* `DOUBLE` : Right ascension at reference epoch, in degrees;
+
 *Dec* `DOUBLE` : Declination at reference epoch, in degrees;
+
 *pmRA* `DOUBLE` : Right ascension proper motion (pmRA x cos(Dec)) at reference epoch, in mas/year;
+
 *pmDec* `DOUBLE` : Declination proper motion reference epoch, in mas/year;
+
 *catEpoch* `DOUBLE` : Reference epoch (e.g. MJD);
+
 *reqEpoch* `DOUBLE` : Requested epoch.
 
 **Return value** (`DOUBLE`):
@@ -290,10 +306,15 @@ Compute right ascension and declination at a given epoch given reference epoch, 
 `radecpmnow(RA, Dec, pmRA, pmDec, catEpoch, reqEpoch)`
 
 *RA* `DOUBLE` : Right ascension at reference epoch, in degrees;
+
 *Dec* `DOUBLE` : Declination at reference epoch, in degrees;
+
 *pmRA* `DOUBLE` : Right ascension proper motion (pmRA x cos(Dec)) at reference epoch, in mas/year;
+
 *pmDec* `DOUBLE` : Declination proper motion reference epoch, in mas/year;
+
 *catEpoch* `DOUBLE` : Reference epoch (e.g. MJD);
+
 *reqEpoch* `DOUBLE` : Requested epoch.
 
 **Return value** (`STRING`):
@@ -318,6 +339,7 @@ Encode into a `hh:mm:ss.ss` formatted string RA decimal hours. Separator other t
 `rahstr(RA_hrs, ['Separator'])`
 
 *RA_hrs* `DOUBLE` : Right ascension as fractional hours;
+
 *Separator* `STRING` : Optional separator to use instead of ":". Use '' or ' ' for blank.
 
 **Return value** (`STRING`);
@@ -349,6 +371,7 @@ Encode into a `+dd:mm:ss.s` formatted string Dec decimal degrees. Separator othe
 `decstr(Dec_deg, ['Separator'])`
 
 *Dec_deg* `DOUBLE` : Declination as fractional degrees;
+
 *Separator* `STRING` : Optional separator to use instead of ":". Use '' or ' ' for blank.
 
 **Return value** (`STRING`);
@@ -380,7 +403,9 @@ Encode into a `hh:mm:ss.ss, +dd:mm:ss.s` formatted string RA and Dec. Separator 
 `decstr(RA_hrs, Dec_deg, ['Separator'])`
 
 *RA_hrs* `DOUBLE` : Right ascension as fractional hours;
+
 *Dec_deg* `DOUBLE` : Declination as fractional degrees;
+
 *Separator* `STRING` : Optional separator to use instead of ":". Use '' or ' ' for blank.
 
 **Return value** (`STRING`);
@@ -403,4 +428,3 @@ mysql> select decstr(12.7891, -37.289, '') as RA_Decs;
 | 12 47 20.76, -37 17 20.4 |
 +--------------------------+
 ```
-
