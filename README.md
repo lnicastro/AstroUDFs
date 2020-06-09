@@ -374,7 +374,7 @@ mysql> select decstr(-37.289, '') as Decs;
 Encode into a `hh:mm:ss.ss, +dd:mm:ss.s` formatted string RA and Dec. Separator other than the ":" can be given as an optional parameter.
 
 **Syntax:**
-`decstr(RA_hrs, Dec_deg, ['Separator'])`
+`rahdecstr(RA_hrs, Dec_deg, ['Separator'])`
 
 *RA_hrs* `DOUBLE` : Right ascension as fractional hours;
 
