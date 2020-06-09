@@ -1,7 +1,7 @@
 ##
 # Some astro functions as MySQL UDF functions (see udf_astro.c).
 # 
-# 17/12/2009: LN@INAF-OAS,  Last change: 05/06/2020
+# 17/12/2009: LN@INAF-OAS,  Last change: 09/06/2020
 ##
 
 MAKE = make
@@ -33,7 +33,7 @@ UDFOBJS = udf_astro.o radec2glgb.o radec2eleb.o pm_radec.o utils.o
 
 LIBFILES = $(UDFOBJS:.o=.c)
 
-EXTRAFILES = Makefile udf_astro.h afuncs.h watdefs.h lunar.h comets.h date.h showelem.h vislimit.h
+EXTRAFILES = Makefile udf_astro.h
 
 EXES = eq2ga eq2ec test_ecl2000 test_pm
 

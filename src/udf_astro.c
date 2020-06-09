@@ -1,5 +1,5 @@
 /*
-  LN @ INAF-OAS, Dec 2009.  Last changed: 04/06/2020
+  LN @ INAF-OAS, Dec 2009.  Last changed: 09/06/2020
   
 To install:
 
@@ -16,6 +16,8 @@ CREATE FUNCTION radecpmnow RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION rahstr RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION decstr RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION rahdecstr RETURNS STRING SONAME 'udf_astro.so';
+CREATE FUNCTION mjd2datet RETURNS STRING SONAME 'udf_astro.so';
+CREATE FUNCTION mjd2datetf RETURNS STRING SONAME 'udf_astro.so';
 
 */
 
@@ -51,6 +53,8 @@ DEFINE_FUNCTION_CHAR(char*, radecstr);
 DEFINE_FUNCTION_CHAR(char*, rahdecstr);
 DEFINE_FUNCTION_CHAR(char*, rahstr);
 DEFINE_FUNCTION_CHAR(char*, decstr);
+DEFINE_FUNCTION_CHAR(char*, mjd2datet);
+DEFINE_FUNCTION_CHAR(char*, mjd2datetf);
 
 //}
 
@@ -540,6 +544,77 @@ char* decstr(UDF_INIT *init, UDF_ARGS *args,
 
 
 void decstr_deinit(UDF_INIT *init)
+{}
+
+
+my_bool mjd2datet_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "mjd2date(MJD DOUBLE)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+
+  init->maybe_null = 0;
+  init->const_item = 0;
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+char* mjd2datet(UDF_INIT *init, UDF_ARGS *args,
+		char *result, unsigned long *length,
+		char *is_null, char* error)
+{
+
+  double mjd = DARGS(0);
+
+  sprintf(result, "%s", mjd2date(mjd));
+  *length = (unsigned long) strlen(result);
+
+  init->ptr = result;
+  return result;
+}
+
+
+void mjd2datet_deinit(UDF_INIT *init)
+{}
+
+
+
+my_bool mjd2datetf_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "mjd2date(MJD DOUBLE)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+
+  init->maybe_null = 0;
+  init->const_item = 0;
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+char* mjd2datetf(UDF_INIT *init, UDF_ARGS *args,
+		char *result, unsigned long *length,
+		char *is_null, char* error)
+{
+
+  double mjd = DARGS(0);
+
+  sprintf(result, "%s", mjd2datef(mjd));
+  *length = (unsigned long) strlen(result);
+
+  init->ptr = result;
+  return result;
+}
+
+
+void mjd2datetf_deinit(UDF_INIT *init)
 {}
 
 //#endif /* HAVE_DLOPEN */

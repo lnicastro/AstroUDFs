@@ -51,6 +51,8 @@ radecpmnow  | (RA_deg, Dec_deg, pmRA, pmDec, catEpoch, reqEpoch) | String |
 rahstr      | (RA_hrs) | String |
 decstr      | (Dec_deg) | String |
 rahdecstr   | (RA_hra, Dec_deg) | String|
+mjd2datet   | (MJD) | String |
+mjd2datetf  | (MJD) | String |
 
 
 ## UDFs reference
@@ -320,7 +322,7 @@ Encode into a `hh:mm:ss.ss` formatted string RA decimal hours. Separator other t
 
 *RA_hrs* `DOUBLE` : Right ascension as fractional hours;
 
-*Separator* `STRING` : Optional separator to use instead of ":". Use '' or ' ' for blank.
+*Separator* `STRING` (optional): Separator to use instead of ":". Use '' or ' ' for blank.
 
 **Return value** (`STRING`);
 RA in the format `hh:mm:ss.ss`.
@@ -348,7 +350,7 @@ Encode into a `+dd:mm:ss.s` formatted string Dec decimal degrees. Separator othe
 
 *Dec_deg* `DOUBLE` : Declination as fractional degrees;
 
-*Separator* `STRING` : Optional separator to use instead of ":". Use '' or ' ' for blank.
+*Separator* `STRING` (optional): Separator to use instead of ":". Use '' or ' ' for blank.
 
 **Return value** (`STRING`);
 Dec in the format `+dd:mm:ss.s`.
@@ -378,7 +380,7 @@ Encode into a `hh:mm:ss.ss, +dd:mm:ss.s` formatted string RA and Dec. Separator 
 
 *Dec_deg* `DOUBLE` : Declination as fractional degrees;
 
-*Separator* `STRING` : Optional separator to use instead of ":". Use '' or ' ' for blank.
+*Separator* `STRING` (optional): Separator to use instead of ":". Use '' or ' ' for blank.
 
 **Return value** (`STRING`);
 RA and Dec in the format `hh:mm:ss.ss, +dd:mm:ss.s`.
@@ -395,4 +397,48 @@ mysql> select decstr(12.7891, -37.289, '') as RA_Decs;
 +--------------------------+
 | 12 47 20.76, -37 17 20.4 |
 +--------------------------+
+```
+
+
+### [ mjd2datet ]
+Encode MJD into a ISO 8601 formatted string: `yyy-mm-ddThh:mm:ss`.
+E.g. `2006-08-07T12:15:11`.
+
+**Syntax:**
+`mjd2datet(MJD)`
+
+*MJD* `DOUBLE` : Modified Julian Date;
+
+**Return value** (`STRING`);
+ISO 8601 calendar date and time.
+
+**Example:**
+
+```sql
+mysql> select mjd2datet(59010.768) as Date_time;
++---------------------+
+| 2020-06-10T18:25:55 |
++---------------------+
+```
+
+
+### [ mjd2datetf ]
+Encode MJD into a formatted string: `yyy-mm-ddThh:mm:ss.sss`.
+E.g. `2006-08-07T12:15:11`.
+
+**Syntax:**
+`mjd2datetf(MJD)`
+
+*MJD* `DOUBLE` : Modified Julian Date;
+
+**Return value** (`STRING`);
+Calendar date and time with milliseconds.
+
+**Example:**
+
+```sql
+mysql> select mjd2datetf(59010.768) as Date_time;
++-------------------------+
+| 2020-06-10T18:25:55.200 |
++-------------------------+
 ```

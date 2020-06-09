@@ -118,3 +118,5 @@ extern void myepoch_coords( const double ra, const double de, const double pmra,
 const double epoch0, const double epoch1, double *ra1, double *de1 );
 extern char *enc_str_rah(double rahr, const char* separator);
 extern char *enc_str_decdeg(double decdeg, const char* separator);
+extern char *mjd2date(double mjd);
+extern char *mjd2datef(double mjd);
