@@ -1,7 +1,7 @@
 ##
 # Some astro functions as MySQL UDF functions (see udf_astro.c).
 # 
-# 17/12/2009: LN@INAF-OAS,  Last change: 09/06/2020
+# 17/12/2009: LN@INAF-OAS,  Last change: 13/06/2020
 ##
 
 MAKE = make
@@ -13,7 +13,7 @@ LDFLAGS = -O2
 MYCFLAGS = `mysql_config --cflags`
 MYLDFLAGS = `mysql_config --libs`
 BINDIR = .
-L = astroudfs
+L = astro
 LIB = lib$(L).a
 LIBS = -L. -l$(L) -lm
 LIBUDF = udf_$(L).so
