@@ -324,7 +324,7 @@ Encode into a `hh:mm:ss.ss` formatted string RA decimal hours. Separator other t
 
 *Separator* `STRING` (optional): Separator to use instead of ":". Use '' or ' ' for blank.
 
-**Return value** (`STRING`);
+**Return value** (`STRING`):
 RA in the format `hh:mm:ss.ss`.
 
 **Example:**
@@ -352,7 +352,7 @@ Encode into a `+dd:mm:ss.s` formatted string Dec decimal degrees. Separator othe
 
 *Separator* `STRING` (optional): Separator to use instead of ":". Use '' or ' ' for blank.
 
-**Return value** (`STRING`);
+**Return value** (`STRING`):
 Dec in the format `+dd:mm:ss.s`.
 
 **Example:**
@@ -382,7 +382,7 @@ Encode into a `hh:mm:ss.ss, +dd:mm:ss.s` formatted string RA and Dec. Separator 
 
 *Separator* `STRING` (optional): Separator to use instead of ":". Use '' or ' ' for blank.
 
-**Return value** (`STRING`);
+**Return value** (`STRING`):
 RA and Dec in the format `hh:mm:ss.ss, +dd:mm:ss.s`.
 
 **Example:**
@@ -409,7 +409,7 @@ E.g. `2006-08-07T12:15:11`.
 
 *MJD* `DOUBLE` : Modified Julian Date;
 
-**Return value** (`STRING`);
+**Return value** (`STRING`):
 ISO 8601 calendar date and time.
 
 **Example:**
@@ -431,7 +431,7 @@ E.g. `2006-08-07T12:15:11`.
 
 *MJD* `DOUBLE` : Modified Julian Date;
 
-**Return value** (`STRING`);
+**Return value** (`STRING`):
 Calendar date and time with milliseconds.
 
 **Example:**
