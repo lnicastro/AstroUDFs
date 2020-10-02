@@ -6,7 +6,7 @@
    Note: input and oputput coordinates are in "degrees".
 
 
-  LN@INAF-OAS, Dec. 2009                   ( Last change: 29/05/2020 )
+  LN@INAF-OAS, Dec. 2009                   ( Last change: 02/10/2020 )
 */
 
 #include <math.h>
@@ -42,9 +42,11 @@ int radec2GlGb(const double ra, const double dec, double *gl, double *gb)
   double opt, v1[3], v2[3];
   const double rarad = ra*DEG2RAD, decrad = dec*DEG2RAD, *matrix = MEQ2GL;
 
-  v1[0] = cos(rarad) * cos(decrad);
-  v1[1] = sin(rarad) * cos(decrad);
-  v1[2] =              sin(decrad);
+  double cosd = cos(decrad);
+
+  v1[0] = cos(rarad) * cosd;
+  v1[1] = sin(rarad) * cosd;
+  v1[2] = sin(decrad);
 
   precess_vector(matrix, v1, v2);
 
@@ -70,9 +72,11 @@ double radec2Gl( const double ra, const double dec)
   double opt, v1[3], v2[3];
   const double rarad = ra*DEG2RAD, decrad = dec*DEG2RAD, *matrix = MEQ2GL;
 
-  v1[0] = cos(rarad) * cos(decrad);
-  v1[1] = sin(rarad) * cos(decrad);
-  v1[2] =              sin(decrad);
+  double cosd = cos(decrad);
+
+  v1[0] = cos(rarad) * cosd;
+  v1[1] = sin(rarad) * cosd;
+  v1[2] = sin(decrad);
 
   precess_vector(matrix, v1, v2);
 
@@ -95,9 +99,11 @@ double radec2Gb( const double ra, const double dec)
   double v1[3], v2[3];
   const double rarad = ra*DEG2RAD, decrad = dec*DEG2RAD, *matrix = MEQ2GL;
 
-  v1[0] = cos(rarad) * cos(decrad);
-  v1[1] = sin(rarad) * cos(decrad);
-  v1[2] =              sin(decrad);
+  double cosd = cos(decrad);
+
+  v1[0] = cos(rarad) * cosd;
+  v1[1] = sin(rarad) * cosd;
+  v1[2] = sin(decrad);
 
   precess_vector(matrix, v1, v2);
 
