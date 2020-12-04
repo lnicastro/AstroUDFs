@@ -2,7 +2,7 @@
   Utility functions.
 
 
-  LN@INAF-OAS, March 2007  ( Last change: 05/06/2020 )
+  LN@INAF-OAS, March 2007  ( Last change: 04/12/2020 )
 */
 
 #include <stdlib.h>
@@ -26,25 +26,23 @@ const static double DEG2RAD = 1.74532925199432957692369E-2;
 
 double skysep_h(double theta1, double phi1, double theta2, double phi2)
 {
-  double a1r, b1r, a2r, b2r, radif, sin2a, sin2d;
+  double phi1r, phi2r, radif, sin2a, sin2d;
 
   if ( theta1 < 0. || theta2 < 0. )
 	return -1.;
 
-  a1r = theta1*DEG2RAD;
-  b1r = phi1*DEG2RAD;
-  a2r = theta2*DEG2RAD;
-  b2r = phi2*DEG2RAD;
+  phi1r = phi1 * DEG2RAD;
+  phi2r = phi2 * DEG2RAD;
 
-  radif  = fabs(a2r-a1r);
+  radif = fabs(theta2 - theta1) * DEG2RAD;
   if (radif > M_PI)
 	radif = PI2 - radif;
   sin2a = sin(radif/2.);
   sin2a *= sin2a;
-  sin2d = sin((b2r-b1r)/2.);
+  sin2d = sin((phi2r - phi1r)/2.);
   sin2d *= sin2d;
 
-  return (2 * asin( sqrt(sin2d + cos(b1r)*cos(b2r)*sin2a) )/DEG2RAD * 60.);
+  return (2 * asin( sqrt(sin2d + cos(phi1r)*cos(phi2r)*sin2a) )/DEG2RAD * 60.);
 }
 
 
@@ -102,15 +100,17 @@ char *enc_str_rah(double rahr, const char* separator)
 	sep[0] = *separator;
 
   ra  = rahr;
-  while (ra > 24.) ra -= 24;
-  while (ra < 0.) ra += 24;
+  while (ra > 24.)
+	ra -= 24;
+  while (ra < 0.)
+	ra += 24;
 
   rah = (unsigned int)(ra);
   ra -= rah;
   ra *= 60.;
   ram = (unsigned int)(ra);
   ra -= ram;
-  rafs = ra*60.;
+  rafs = ra * 60.;
 
   sprintf(str_ra,"%2.2d%1s%2.2d%1s%05.2f",rah, sep, ram, sep, rafs);
 //printf("%f  %s\n",rahr, str_ra);
@@ -167,10 +167,12 @@ char *enc_str_decdeg(double decdeg, const char* separator)
         sep[0] = *separator;
 
   dec = decdeg;
-  while (dec > 90.) dec -= 90;
-  while (dec < -90.) dec += 90;
+  while (dec > 90.)
+	dec -= 90;
+  while (dec < -90.)
+	dec += 90;
 
-  if (dec < 0.)
+  if ( dec < 0. )
   {
     sign[0] = '-';
     dec *= -1.;
@@ -182,7 +184,7 @@ char *enc_str_decdeg(double decdeg, const char* separator)
   dec -= decm;
   decfs = dec*60.;
 
-  sprintf(str_dec,"%s%2.2d%1s%2.2d%1s%04.1f", sign, decd, sep, decm, sep, decfs);
+  sprintf(str_dec, "%s%2.2d%1s%2.2d%1s%04.1f", sign, decd, sep, decm, sep, decfs);
 
   return str_dec;
 }
@@ -207,7 +209,7 @@ double deg_ra(const char *ra_str)
   float rafs;
   double ra;
 
-  if (ra_str[2] == ':' || ra_str[2] == ' ') {
+  if ( ra_str[2] == ':' || ra_str[2] == ' ' ) {
     sscanf(ra_str,"%2d", &rah);
     ra_str += 3;
     n += 3;
@@ -216,7 +218,7 @@ double deg_ra(const char *ra_str)
     ra_str += 2;
     n += 2;
   }
-  if (ra_str[2] == ':' || ra_str[2] == ' ') {
+  if ( ra_str[2] == ':' || ra_str[2] == ' ' ) {
     sscanf(ra_str,"%2d", &ram);
     ra_str += 3;
     n += 3;
@@ -228,7 +230,8 @@ double deg_ra(const char *ra_str)
   sscanf(ra_str,"%f", &rafs);
   ra_str -= n;
   ra  = (rah + ram/60. + rafs/3.6e3) * 15.;
-  if (ra < 0.) ra += 360;  // Should never happen
+  if (ra < 0.)  // This should never happen
+	ra += 360;
 
   return ra;
 }
@@ -251,12 +254,12 @@ double deg_dec(const char *dec_str)
   float defs;
   double de;
 
-  if (dec_str[0] == '+' || dec_str[0] == '-') {
+  if ( dec_str[0] == '+' || dec_str[0] == '-' ) {
     dec_str += 1;
     n += 1;
   }
 
-  if (dec_str[2] == ':' || dec_str[2] == ' ') {
+  if ( dec_str[2] == ':' || dec_str[2] == ' ' ) {
     sscanf(dec_str,"%2d", &deg);
     dec_str += 3;
     n += 3;
@@ -265,7 +268,7 @@ double deg_dec(const char *dec_str)
     dec_str += 2;
     n += 2;
   }
-  if (dec_str[2] == ':' || dec_str[2] == ' ') {
+  if ( dec_str[2] == ':' || dec_str[2] == ' ' ) {
     sscanf(dec_str,"%2d", &dem);
     dec_str += 3;
     n += 3;
@@ -277,7 +280,8 @@ double deg_dec(const char *dec_str)
   sscanf(dec_str,"%f", &defs);
   de  = deg + dem/60. + defs/3.6e3;
   dec_str -= n;
-  if (dec_str[0] == '-') de *= -1;
+  if ( dec_str[0] == '-' )
+	de *= -1;
 
   return de;
 }
@@ -311,10 +315,11 @@ char *mjd2date_gen(double mjd, unsigned int with_ms)
 
 /* Verify date is acceptable */
   dj = dj1 + mjd;
-  if (dj < DJMIN || dj > DJMAX) return '\0';
+  if ( dj < DJMIN || dj > DJMAX )
+	return "";
 
 /* Copy the date, big then small, and re-align to midnight */
-  if (dj1 >= mjd) {
+  if ( dj1 >= mjd ) {
      d1 = dj1;
      d2 = mjd;
   } else {
@@ -327,7 +332,8 @@ char *mjd2date_gen(double mjd, unsigned int with_ms)
   f1 = fmod(d1, 1.);
   f2 = fmod(d2, 1.);
   f = fmod(f1 + f2, 1.);
-  if (f < 0.) f += 1.;
+  if ( f < 0. )
+	f += 1.;
   d = floor(d1 - f1) + floor(d2 - f2) + floor(f1 + f2 - f);
   jd = (long) floor(d) + 1L;
 
