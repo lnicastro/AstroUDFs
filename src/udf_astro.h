@@ -58,7 +58,7 @@ long long int Conv_int(void* p, enum Item_result type)
   case STRING_RESULT:
   case DECIMAL_RESULT:
     if (sscanf((char*) p, "%lld", &ret) != 1)
-      return 0;
+	return 0;
     break;
   case INT_RESULT:
     ret = (*((long long*) p));
@@ -82,7 +82,7 @@ double Conv_double(void* p, enum Item_result type)
   case STRING_RESULT:
   case DECIMAL_RESULT:
     if (sscanf((char*) p, "%lf", &ret) != 1)
-      return 0;
+	return 0;
     break;
   case INT_RESULT:
     ret = (*((long long*) p));
@@ -111,11 +111,11 @@ extern int radec2ElEb(const double ra, const double dec, double *el, double *eb)
 extern double radec2El( const double ra, const double dec );
 extern double radec2Eb( const double ra, const double dec );
 extern double myepoch_coords_ra( const double ra, const double de, const double pmra, const double pmde,
-  const double epoch0, const double epoch1 );
+	const double epoch0, const double epoch1 );
 extern double myepoch_coords_dec( const double ra, const double de, const double pmra, const double pmde,
-  const double epoch0, const double epoch1 );
+	const double epoch0, const double epoch1 );
 extern void myepoch_coords( const double ra, const double de, const double pmra, const double pmde,
-const double epoch0, const double epoch1, double *ra1, double *de1 );
+	const double epoch0, const double epoch1, double *ra1, double *de1 );
 extern char *enc_str_rah(double rahr, const char* separator);
 extern char *enc_str_decdeg(double decdeg, const char* separator);
 extern char *mjd2date(double mjd);
