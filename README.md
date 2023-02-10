@@ -4,6 +4,10 @@ All implemented as C UDF functions.
 
 Written to be used on Linux and Mac OS.
 
+
+[![DOI](https://zenodo.org/badge/269748443.svg)](https://zenodo.org/badge/latestdoi/269748443)
+
+
 More to come. THIS IS WORK IN PROGESS!
 
 ## Requirements
