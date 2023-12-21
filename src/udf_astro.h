@@ -120,3 +120,5 @@ extern char *enc_str_rah(double rahr, const char* separator);
 extern char *enc_str_decdeg(double decdeg, const char* separator);
 extern char *mjd2date(double mjd);
 extern char *mjd2datef(double mjd);
+extern double deg_ra(const char *ra_str);
+extern double deg_dec(const char *dec_str);

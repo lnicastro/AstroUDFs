@@ -43,6 +43,8 @@ To import UDFs into MySQL (from the directory `sql`):
  UDF        | Parameters     | Returns  |
 ----------- | -------------- | -------- |
 skysep      | (RA1 ,Dec1, RA2, Dec2) | Double |
+ras2deg     | (RA_hhmmss) | String |
+decs2deg    | (DEC_ddmmss) | String |
 radec2gl    | (RA, Dec) | Double |
 radec2gb    | (RA, Dec) | Double |
 radec2glgb  | (RA, Dec) | String |
@@ -83,6 +85,48 @@ Angular distance between the points, in arcmin.
 select Sphedist(125.6, -37.5, 121.4, -38.1) as d_arcmin;
 +-------------------+
 | 202.3282326405512 |
++-------------------+
+```
+
+
+### [ ras2deg ]
+Decode a right ascension sexagesimal string formatted as "hh mm ss.s" or "hh:mm:ss.s" into fractional degrees 
+
+**Syntax:**
+`ras2deg(RA_hhmmss)`
+
+*RA_hhmmss* `STRING` : Object right ascension in sexagesimal format;
+
+**Return value** (`DOUBLE`):
+Right ascension, in the range [0, 360[ degrees.
+
+**Example:**
+
+```sql
+mysql> select ras2deg('00 33 18.34') as RAdeg;
++------------------+
+| 8.32641666730245 |
++------------------+
+```
+
+
+### [ decs2deg ]
+Decode a declination sexagesimal string formatted as "+/-dd mm ss.s" or "+/-dd:mm:ss.s" into fractional degrees 
+
+**Syntax:**
+`decs2deg(DEC_ddmmss)`
+
+*DEC_ddmmss* `STRING` : Object declination in sexagesimal format;
+
+**Return value** (`DOUBLE`):
+Declination, in the range [-90, 90] degrees.
+
+**Example:**
+
+```sql
+mysql> select decs2deg('+61 27 43.3') as DECdeg;
++-------------------+
+| 61.46202777756585 |
 +-------------------+
 ```
 

@@ -46,6 +46,8 @@ DEFINE_FUNCTION(double, radec2el);
 DEFINE_FUNCTION(double, radec2eb);
 DEFINE_FUNCTION(double, radecpm2ra);
 DEFINE_FUNCTION(double, radecpm2de);
+DEFINE_FUNCTION(double, ras2deg);
+DEFINE_FUNCTION(double, decs2deg);
 DEFINE_FUNCTION_CHAR(char*, radec2glgb);
 DEFINE_FUNCTION_CHAR(char*, radec2eleb);
 DEFINE_FUNCTION_CHAR(char*, radecpmnow);
@@ -85,6 +87,56 @@ double skysep(UDF_INIT *init, UDF_ARGS *args,
 void skysep_deinit(UDF_INIT *init)
 {}
 
+
+/* Decode right ascension and declination from sexagesimal string to decimal degrees */
+
+my_bool ras2deg_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "ras2deg(RA_hms STRING)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_TYPE(1, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double ras2deg(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return deg_ra(CARGS(0));
+}
+
+
+void ras2deg_deinit(UDF_INIT *init)
+{}
+
+
+
+my_bool decs2deg_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "ras2deg(DEC_ddmmss STRING)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_TYPE(1, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double decs2deg(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return deg_dec(CARGS(0));
+}
+
+
+void decs2deg_deinit(UDF_INIT *init)
+{}
 
 
 /* Equatorial 2000 to Galactic 2000 */
@@ -409,7 +461,7 @@ void radecstr_deinit(UDF_INIT *init)
 
 my_bool rahdecstr_init(UDF_INIT* init, UDF_ARGS *args, char *message)
 {
-  const char* argerr = "rahdecstr(RA_hours DOUBLE, DEC_deg, separator STRING)";
+  const char* argerr = "rahdecstr(RA_hours DOUBLE, DEC_deg DOUBLE, separator STRING)";
 
   switch (args->arg_count) {
     case 3:
