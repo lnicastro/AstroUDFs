@@ -28,3 +28,7 @@ src/eq2ga
 src/eq2ec
 src/test_ecl2000
 src/test_pm
+src/test_z2ld
+
+# More stuff
+.DS_Store
