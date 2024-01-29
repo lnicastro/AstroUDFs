@@ -1,7 +1,7 @@
 ##
 # Some astro functions as MySQL UDF functions (see udf_astro.c).
 # 
-# 17/12/2009: LN@INAF-OAS,  Last change: 13/06/2020
+# 17/12/2009: LN@INAF-OAS,  Last change: 29/01/2024
 ##
 
 MAKE = make
@@ -29,7 +29,7 @@ LINK.cpp = $(CCPP) $(LDFLAGS)
 	$(CC) $(CFLAGS) $<
 
 
-UDFOBJS = udf_astro.o radec2glgb.o radec2eleb.o pm_radec.o utils.o
+UDFOBJS = udf_astro.o radec2glgb.o radec2eleb.o pm_radec.o utils.o z2ld.o
 
 LIBFILES = $(UDFOBJS:.o=.c)
 
@@ -49,6 +49,9 @@ udf: $(UDFOBJS) $(LIBUDF)
 # MySQL UDFs
 udf_astro.o: udf_astro.c
 	$(CC) $(CFLAGS) $(MYCFLAGS) udf_astro.c
+
+test_z2ld: test_z2ld.o $(LIB)
+	$(LINK.c) -o $@ $@.o $(LIBS)
 
 test_pm: test_pm.o $(LIB)
 	$(LINK.c) -o $@ $@.o $(LIBS)

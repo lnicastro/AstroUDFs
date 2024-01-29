@@ -1,9 +1,12 @@
 /*
-  LN @ INAF-OAS, Dec 2009.  Last changed: 09/06/2020
+  LN @ INAF-OAS, Dec 2009.  Last changed: 29/01/2024
   
 To install:
 
 CREATE FUNCTION skysep RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION z2ldist RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION ras2deg RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION decs2deg RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radec2gl RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radec2gb RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radec2glgb RETURNS STRING SONAME 'udf_astro.so';
@@ -19,6 +22,7 @@ CREATE FUNCTION rahdecstr RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION mjd2datet RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION mjd2datetf RETURNS STRING SONAME 'udf_astro.so';
 
+See ../sql/udfinstall.sql
 */
 
 #include <stdio.h>
@@ -40,6 +44,7 @@ typedef bool   my_bool;
 
 // Local functions
 DEFINE_FUNCTION(double, skysep);
+DEFINE_FUNCTION(double, z2ldist);
 DEFINE_FUNCTION(double, radec2gl);
 DEFINE_FUNCTION(double, radec2gb);
 DEFINE_FUNCTION(double, radec2el);
@@ -88,6 +93,33 @@ void skysep_deinit(UDF_INIT *init)
 {}
 
 
+/* From redshift z to luminosity distance - H_o = 69.6, Omega_M = 0.286, Omega_vac = 0.714 */
+
+my_bool z2ldist_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "z2ldist(z DOUBLE)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double z2ldist(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return z2ld(DARGS(0));
+}
+
+
+void z2ldist_deinit(UDF_INIT *init)
+{}
+
+
+
 /* Decode right ascension and declination from sexagesimal string to decimal degrees */
 
 my_bool ras2deg_init(UDF_INIT* init, UDF_ARGS *args, char *message)
@@ -112,7 +144,6 @@ double ras2deg(UDF_INIT *init, UDF_ARGS *args,
 
 void ras2deg_deinit(UDF_INIT *init)
 {}
-
 
 
 my_bool decs2deg_init(UDF_INIT* init, UDF_ARGS *args, char *message)

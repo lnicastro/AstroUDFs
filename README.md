@@ -43,6 +43,7 @@ To import UDFs into MySQL (from the directory `sql`):
  UDF        | Parameters     | Returns  |
 ----------- | -------------- | -------- |
 skysep      | (RA1 ,Dec1, RA2, Dec2) | Double |
+z2ldist     | (z) | Double |
 ras2deg     | (RA_hhmmss) | String |
 decs2deg    | (DEC_ddmmss) | String |
 radec2gl    | (RA, Dec) | Double |
@@ -86,6 +87,26 @@ select Sphedist(125.6, -37.5, 121.4, -38.1) as d_arcmin;
 +-------------------+
 | 202.3282326405512 |
 +-------------------+
+```
+
+
+### [ z2ldist ]
+Compute the luminosity distance given the redshift z.
+Cosmology parameters used are: `H_o = 69.6, Omega_M = 0.286, Omega_vac = 0.714`
+
+**Syntax:**
+`z2ldist(z)`
+
+*z* `REAL` : redshift z;
+
+**Return value** (`DOUBLE`):
+Luminosity distance in Mpc.
+
+```sql
+select z2ldist(1.438) as D_L;
++-----------+
+| 10523.511 |
++-----------+
 ```
 
 
