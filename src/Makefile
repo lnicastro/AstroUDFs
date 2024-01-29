@@ -35,7 +35,7 @@ LIBFILES = $(UDFOBJS:.o=.c)
 
 EXTRAFILES = Makefile udf_astro.h
 
-EXES = eq2ga eq2ec test_ecl2000 test_pm
+EXES = eq2ga eq2ec test_ecl2000 test_pm test_z2ld
 
 MAIN = $(EXES:=.c)
 
