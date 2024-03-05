@@ -1,5 +1,5 @@
 /*
-  LN @ INAF-OAS, Dec 2009.  Last changed: 29/01/2024
+  LN @ INAF-OAS, Dec 2009.  Last changed: 05/03/2024
   
 To install:
 
@@ -13,6 +13,9 @@ CREATE FUNCTION radec2glgb RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION radec2el RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radec2eb RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radec2eleb RETURNS STRING SONAME 'udf_astro.so';
+CREATE FUNCTION glgb2ra RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION glgb2dec RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION glgb2radec RETURNS STRING SONAME 'udf_astro.so';
 CREATE FUNCTION radecpm2ra RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radecpm2dec RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radecpmnow RETURNS STRING SONAME 'udf_astro.so';
@@ -49,12 +52,15 @@ DEFINE_FUNCTION(double, radec2gl);
 DEFINE_FUNCTION(double, radec2gb);
 DEFINE_FUNCTION(double, radec2el);
 DEFINE_FUNCTION(double, radec2eb);
+DEFINE_FUNCTION(double, glgb2ra);
+DEFINE_FUNCTION(double, glgb2dec);
 DEFINE_FUNCTION(double, radecpm2ra);
 DEFINE_FUNCTION(double, radecpm2de);
 DEFINE_FUNCTION(double, ras2deg);
 DEFINE_FUNCTION(double, decs2deg);
 DEFINE_FUNCTION_CHAR(char*, radec2glgb);
 DEFINE_FUNCTION_CHAR(char*, radec2eleb);
+DEFINE_FUNCTION_CHAR(char*, glgb2radec);
 DEFINE_FUNCTION_CHAR(char*, radecpmnow);
 DEFINE_FUNCTION_CHAR(char*, radecstr);
 DEFINE_FUNCTION_CHAR(char*, rahdecstr);
@@ -348,6 +354,99 @@ double radec2eb(UDF_INIT *init, UDF_ARGS *args,
 void radec2eb_deinit(UDF_INIT *init)
 {}
 
+
+
+/* Galactic to Equatorial 2000 */
+
+my_bool glgb2radec_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "glgb2radec(Gl_deg DOUBLE, Gb_deg DOUBLE)";
+
+  CHECK_ARG_NUM(2);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+  CHECK_ARG_NOT_TYPE(1, STRING_RESULT);
+
+  init->maybe_null = 0;
+  init->const_item = 0;
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+char* glgb2radec(UDF_INIT *init, UDF_ARGS *args,
+                char *result, unsigned long *length,
+                char *is_null, char* error)
+{
+  double gl, gb;
+
+  GlGb2radec(DARGS(0), DARGS(1), &gl, &gb);
+
+  sprintf(result, "%.16g, %.16g", gl, gb);
+  *length = (unsigned long) strlen(result);
+
+  init->ptr = result;
+  return result;
+}
+
+
+void glbg2radec_deinit(UDF_INIT *init)
+{}
+
+
+my_bool glgb2ra_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "glgb2ra(Gl_deg DOUBLE, Gb_deg DOUBLE)";
+
+  CHECK_ARG_NUM(2);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+  CHECK_ARG_NOT_TYPE(1, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double glgb2ra(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return GlGb2ra(DARGS(0), DARGS(1));
+}
+
+
+void glgb2ra_deinit(UDF_INIT *init)
+{}
+
+
+my_bool glgb2dec_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "glgb2dec(Gl_deg DOUBLE, Gb_deg DOUBLE)";
+
+  CHECK_ARG_NUM(2);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+  CHECK_ARG_NOT_TYPE(1, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double glgb2dec(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return GlGb2dec(DARGS(0), DARGS(1));
+}
+
+
+void glgb2dec_deinit(UDF_INIT *init)
+{}
+
+
+
+/* PM updated coords at given epoch */
 
 my_bool radecpm2ra_init(UDF_INIT* init, UDF_ARGS *args, char *message)
 {

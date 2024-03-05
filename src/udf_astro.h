@@ -111,6 +111,9 @@ extern double radec2Gb( const double ra, const double dec );
 extern int radec2ElEb(const double ra, const double dec, double *el, double *eb);
 extern double radec2El( const double ra, const double dec );
 extern double radec2Eb( const double ra, const double dec );
+extern int GlGb2radec( const double gl, const double gb, double *ra, double *dec );
+extern double GlGb2ra( const double gl, const double gb );
+extern double GlGb2dec( const double gl, const double gb );
 extern double myepoch_coords_ra( const double ra, const double de, const double pmra, const double pmde,
 	const double epoch0, const double epoch1 );
 extern double myepoch_coords_dec( const double ra, const double de, const double pmra, const double pmde,

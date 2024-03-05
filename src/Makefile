@@ -35,7 +35,7 @@ LIBFILES = $(UDFOBJS:.o=.c)
 
 EXTRAFILES = Makefile udf_astro.h
 
-EXES = eq2ga eq2ec test_ecl2000 test_pm test_z2ld
+EXES = ga2eq eq2ga eq2ec test_ecl2000 test_pm test_z2ld
 
 MAIN = $(EXES:=.c)
 
@@ -63,6 +63,9 @@ eq2ec: eq2ec.o $(LIB)
 	$(LINK.c) -o $@ $@.o $(LIBS)
 
 eq2ga: eq2ga.o $(LIB)
+	$(LINK.c) -o $@ $@.o $(LIBS)
+
+ga2eq: ga2eq.o $(LIB)
 	$(LINK.c) -o $@ $@.o $(LIBS)
 
 $(LIB): $(UDFOBJS)

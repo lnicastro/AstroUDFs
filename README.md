@@ -52,6 +52,9 @@ radec2glgb  | (RA, Dec) | String |
 radec2el    | (RA, Dec) | Double |
 radec2eb    | (RA, Dec) | Double |
 radec2eleb  | (RA, Dec) | String |
+glgb2ra     | (Gl, Gb) | Double |
+glgb2dec    | (Gl, Gb) | Double |
+glgb2radec  | (Gl, Gb) | String |
 radecpm2ra  | (RA_deg, Dec_deg, pmRA, pmDec, catEpoch, reqEpoch) | Double |
 radecpm2dec | (RA_deg, Dec_deg, pmRA, pmDec, catEpoch, reqEpoch) | Double |
 radecpmnow  | (RA_deg, Dec_deg, pmRA, pmDec, catEpoch, reqEpoch) | String |
@@ -267,26 +270,95 @@ mysql> select radec2eb(320.85, 12.67) as Eb;
 ```
 
 
-### [ radec2eleb ]
-Ecliptic longitude and latitude from given equatorial J2000 coordinates.
+### [ glgb2radec ]
+Equatorial J2000 coordinates from given Galactic longitude and latitude.
 
 **Syntax:**
-`radec2eleb(RA, Dec)`
+`glgb2radec(Gl, Gb)`
 
-*RA* `DOUBLE` : Object right ascension (J2000) in degrees;
+*Gl* `DOUBLE` : Object Galactic longitude in degrees;
 
-*Dec* `DOUBLE` : Object declination (J2000) in degrees.
+*Gb* `DOUBLE` : Object Galactic latitude in degrees.
 
 **Return value** (`STRING`):
-Ecliptic longitude and latitude, in the range [0, 360[, [-90, 90] degrees.
+Equatorial coordinates (J2000), in the range [0, 360[, [-90, 90] degrees.
 
 **Example:**
 
 ```sql
-mysql> select radec2eleb(320.85, 12.67) as lon_lat;
-+-------------------------------------+
-| 327.7266930717887, 26.5073679424105 |
-+-------------------------------------+
+mysql> select glgb2radec(306.7, 17.18) as lon_lat;
++---------------------------------------+
+| 198.0025637794347, -45.54118132060999 |
++---------------------------------------+
+```
+
+
+### [ glgb2ra ]
+Right Ascension from given Galactic longitude and latitude.
+
+**Syntax:**
+`glgb2ra(Gl, Gb)`
+
+*Gl* `DOUBLE` : Object Galactic longitude in degrees;
+
+*Gb* `DOUBLE` : Object Galactic latitude in degrees.
+
+**Return value** (`DOUBLE`):
+RA (J2000), in the range [0, 360[ degrees.
+
+**Example:**
+
+```sql
+mysql> select glgb2ra(306.7, 17.18) as RAJ2000;
++--------+
+| 198.00 |
++--------+
+```
+
+
+### [ glgb2dec ]
+Declination from given Galactic longitude and latitude.
+
+**Syntax:**
+`glgb2dec(Gl, Gb)`
+
+*Gl* `DOUBLE` : Object Galactic longitude in degrees;
+
+*Gb* `DOUBLE` : Object Galactic latitude in degrees.
+
+**Return value** (`DOUBLE`):
+Dec (J2000), in the range [-90, 90] degrees.
+
+**Example:**
+
+```sql
+mysql> select glgb2dec(306.7, 17.18) as DEJ2000;
++--------+
+| -45.54 |
++--------+
+```
+
+
+### [ glgb2radec ]
+Right Ascension and Declination from given Galactic longitude and latitude.
+
+**Syntax:**
+`glgb2radec(Gl, Gb)`
+
+*Gl* `DOUBLE` : Object Galactic longitude in degrees;
+
+*Gb* `DOUBLE` : Object Galactic latitude in degrees.
+
+**Return value** (`STRING`):
+Ra and Dec (J2000), in the range [0, 360[, [-90, 90] degrees.
+
+**Example:**
+
+```sql
+mysql> select glgb2radec(306.7, 17.18) as GlGb;
++---------------------------------------+
+| 198.0025637794347, -45.54118132060999 |
++---------------------------------------+
 ```
 
 
