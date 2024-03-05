@@ -154,13 +154,15 @@ int main(int argc, char **argv)
 
   if (argc < 3) {
         printf( "RA: " );
-        gets(s);
+	fgets(s, sizeof s, stdin);
+	ra = atof(s) * DEG2RAD;
         printf( "Dec: " );
-        gets(s);
-  } else
-
-  ra = atof(argv[1]) * DEG2RAD;
-  de = atof(argv[2]) * DEG2RAD;
+	fgets(s, sizeof s, stdin);
+	de = atof(s) * DEG2RAD;
+  } else {
+	ra = atof(argv[1]) * DEG2RAD;
+	de = atof(argv[2]) * DEG2RAD;
+  }
 
 // spherical to cartesian
   dcs2c(ra,de,v1);

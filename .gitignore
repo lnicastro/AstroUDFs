@@ -24,6 +24,7 @@ src/*.a
 src/*.lib
 
 # Executables
+src/ga2eq
 src/eq2ga
 src/eq2ec
 src/test_ecl2000
