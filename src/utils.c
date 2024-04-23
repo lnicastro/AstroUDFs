@@ -299,7 +299,7 @@ double deg_dec(const char *dec_str)
   Return '\0' for bad input date.
 
 
-  LN@INAF-OAS, Aug 2006                        ( Last change: 01/03/2024 )
+  LN@INAF-OAS, Aug 2006                        ( Last change: 23/04/2024 )
 */
 char *mjd2date_gen(double mjd, unsigned int with_ms)
 {
@@ -356,7 +356,7 @@ char *mjd2date_gen(double mjd, unsigned int with_ms)
 
   if ( with_ms ) {
     f -= s/86400.;
-    fs = (int)(f*8.64e7 + 0.5);
+    fs = (int)(f*8.64e7);
     sprintf(date, "%4d-%2.2d-%2.2dT%2.2d:%2.2d:%2.2d.%3.3d", iy, im, id, h, mm, s, fs);
   } else {
     sprintf(date, "%4d-%2.2d-%2.2dT%2.2d:%2.2d:%2.2d", iy, im, id, h, mm, s);
