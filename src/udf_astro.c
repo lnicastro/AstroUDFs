@@ -1,5 +1,5 @@
 /*
-  LN @ INAF-OAS, Dec 2009.  Last changed: 05/03/2024
+  LN @ INAF-OAS, Dec 2009.  Last changed: 23/04/2024
   
 To install:
 
@@ -35,7 +35,7 @@ See ../sql/udfinstall.sql
 
 #include <mysql.h>
 
-#if MYSQL_VERSION_ID >= 80000
+#if MYSQL_VERSION_ID >= 80000 && MYSQL_VERSION_ID < 100000
 typedef bool   my_bool;
 #endif
 
