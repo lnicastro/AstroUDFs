@@ -154,11 +154,11 @@ int main(int argc, char **argv)
 
   if (argc < 3) {
         printf( "RA: " );
-	fgets(s, sizeof s, stdin);
-	ra = atof(s) * DEG2RAD;
+	if (fgets(s, sizeof s, stdin))
+	  ra = atof(s) * DEG2RAD;
         printf( "Dec: " );
-	fgets(s, sizeof s, stdin);
-	de = atof(s) * DEG2RAD;
+	if (fgets(s, sizeof s, stdin))
+	  de = atof(s) * DEG2RAD;
   } else {
 	ra = atof(argv[1]) * DEG2RAD;
 	de = atof(argv[2]) * DEG2RAD;
