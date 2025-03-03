@@ -6,10 +6,10 @@
   http://www.astro.yale.edu/simmons/cosmocalc/
   
   Note:
-    The "General" case is assumed: H_o = 69.6, Omega_M = 0.286, Omega_vac = 0.714
+    The "Planck 2018" cosmology for a flat LCDM universe is assumed: H_0 = 67.7, Omega_m = 0.31, Omega_l = 0.69
 
 
-  LN @ INAF-OAS, Jan 2024.  Last changed: 29/01/2024
+  LN @ INAF-OAS, Jan 2024.  Last changed: 03/03/2025
 */
 
 #include <stdlib.h>
@@ -43,10 +43,10 @@ double z2ld(const float z) {
 
   int i;                   // index
   const int n = 1000;      // number of points in integrals
-  const float H0 = 69.6;   // Hubble constant
-  const float h = 0.696;   // H0/100
-  const float WM = 0.286;  // Omega(matter)
-  const float WV = 0.714;  // Omega(vacuum) or lambda
+  const float H0 = 67.7;   // Hubble constant
+  const float h = 0.677;   // H0/100
+  const float WM = 0.310;  // Omega(matter)
+  const float WV = 0.690;  // Omega(vacuum) or lambda
   const double WR = 4.165E-5/(h*h);  // Omega(radiation) - includes 3 massless neutrino species, T0 = 2.72528
   const double WK = 1.0-WM-WR-WV;    // Omega curvaturve = 1-Omega(total)
   const double c = 299792.458;       // velocity of light in km/s

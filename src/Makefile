@@ -1,7 +1,7 @@
 ##
 # Some astro functions as MySQL UDF functions (see udf_astro.c).
 # 
-# 17/12/2009: LN@INAF-OAS,  Last change: 29/01/2024
+# 17/12/2009: LN@INAF-OAS,  Last change: 03/03/2025
 ##
 
 MAKE = make
@@ -73,7 +73,7 @@ $(LIB): $(UDFOBJS)
 	ranlib $@
 
 $(LIBUDF): $(UDFOBJS)
-	$(CC) -shared $(LDFLAGS) $(MYLDFLAGS) -o $@ $(UDFOBJS) $(LIBS) -l$(L)
+	$(CC) -shared $(LDFLAGS) $(MYLDFLAGS) -o $@ $(UDFOBJS) $(LIBS)
 
 
 install: $(LIB) $(LIBSO)

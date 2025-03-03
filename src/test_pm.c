@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
   if (argc == 1) {
 	printf( "MJD: " );
-	gets(s);
+	fgets(s, 20, stdin);
 	sscanf( s, "%lf", &mjd1 );
   } else 
 	sscanf( argv[1], "%lf", &mjd1 );
