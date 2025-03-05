@@ -12,7 +12,7 @@ void myepoch_coords(const double ra, const double de, const double pmra, const d
 
 int main(int argc, char *argv[])
 {
-  double mjd0,mjd1, ra,de, ra1,de1, pmra,pmde;
+  double mjd0,mjd1=0., ra,de, ra1,de1, pmra,pmde;
   char s[20];
 
 // Groombridge 1830

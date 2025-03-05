@@ -1,7 +1,7 @@
 ##
 # Some astro functions as MySQL UDF functions (see udf_astro.c).
 # 
-# 17/12/2009: LN@INAF-OAS,  Last change: 03/03/2025
+# 17/12/2009: LN@INAF-OAS,  Last change: 05/03/2025
 ##
 
 MAKE = make
@@ -35,7 +35,7 @@ LIBFILES = $(UDFOBJS:.o=.c)
 
 EXTRAFILES = Makefile udf_astro.h
 
-EXES = ga2eq eq2ga eq2ec test_ecl2000 test_pm test_z2ld
+EXES = ga2eq eq2ga eq2ec test_ecl2000 test_pm test_z2ld test_z2ad test_z2ascale
 
 MAIN = $(EXES:=.c)
 
@@ -50,7 +50,13 @@ udf: $(UDFOBJS) $(LIBUDF)
 udf_astro.o: udf_astro.c
 	$(CC) $(CFLAGS) $(MYCFLAGS) udf_astro.c
 
+test_z2ad: test_z2ad.o $(LIB)
+	$(LINK.c) -o $@ $@.o $(LIBS)
+
 test_z2ld: test_z2ld.o $(LIB)
+	$(LINK.c) -o $@ $@.o $(LIBS)
+
+test_z2ascale: test_z2ascale.o $(LIB)
 	$(LINK.c) -o $@ $@.o $(LIBS)
 
 test_pm: test_pm.o $(LIB)

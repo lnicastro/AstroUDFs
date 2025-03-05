@@ -1,10 +1,12 @@
 /*
-  LN @ INAF-OAS, Dec 2009.  Last changed: 23/04/2024
+  LN @ INAF-OAS, Dec 2009.  Last changed: 05/03/2025
   
 To install:
 
 CREATE FUNCTION skysep RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION z2lang RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION z2ldist RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION z2ascl RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION ras2deg RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION decs2deg RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION radec2gl RETURNS REAL SONAME 'udf_astro.so';
@@ -47,7 +49,9 @@ typedef bool   my_bool;
 
 // Local functions
 DEFINE_FUNCTION(double, skysep);
+DEFINE_FUNCTION(double, z2adist);
 DEFINE_FUNCTION(double, z2ldist);
+DEFINE_FUNCTION(double, z2ascl);
 DEFINE_FUNCTION(double, radec2gl);
 DEFINE_FUNCTION(double, radec2gb);
 DEFINE_FUNCTION(double, radec2el);
@@ -99,7 +103,34 @@ void skysep_deinit(UDF_INIT *init)
 {}
 
 
-/* From redshift z to luminosity distance - H_o = 69.6, Omega_M = 0.286, Omega_vac = 0.714 */
+/* From redshift z to angular size distance - H_0 = 67.4, Omega_M = 0.315, Omega_vac = 0.685 (Planck 2018) */
+
+my_bool z2adist_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "z2adist(z DOUBLE)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double z2adist(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return z2ad(DARGS(0));
+}
+
+
+void z2adist_deinit(UDF_INIT *init)
+{}
+
+
+
+/* From redshift z to luminosity distance */
 
 my_bool z2ldist_init(UDF_INIT* init, UDF_ARGS *args, char *message)
 {
@@ -122,6 +153,33 @@ double z2ldist(UDF_INIT *init, UDF_ARGS *args,
 
 
 void z2ldist_deinit(UDF_INIT *init)
+{}
+
+
+
+/* From redshift z to angular scale (arcsec/kpc) */
+
+my_bool z2ascl_init(UDF_INIT* init, UDF_ARGS *args, char *message)
+{
+  const char* argerr = "z2ascl(z DOUBLE)";
+
+  CHECK_ARG_NUM(1);
+  CHECK_ARG_NOT_TYPE(0, STRING_RESULT);
+
+  init->ptr = NULL;
+
+  return 0;
+}
+
+
+double z2ascl(UDF_INIT *init, UDF_ARGS *args,
+                char *is_null, char* error)
+{
+  return z2ascale(DARGS(0));
+}
+
+
+void z2ascl_deinit(UDF_INIT *init)
 {}
 
 

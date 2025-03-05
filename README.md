@@ -43,7 +43,9 @@ To import UDFs into MySQL (from the directory `sql`):
  UDF        | Parameters     | Returns  |
 ----------- | -------------- | -------- |
 skysep      | (RA1 ,Dec1, RA2, Dec2) | Double |
+z2adist     | (z) | Double |
 z2ldist     | (z) | Double |
+z2ascl     | (z) | Double |
 ras2deg     | (RA_hhmmss) | String |
 decs2deg    | (DEC_ddmmss) | String |
 radec2gl    | (RA, Dec) | Double |
@@ -93,9 +95,29 @@ select Sphedist(125.6, -37.5, 121.4, -38.1) as d_arcmin;
 ```
 
 
+### [ z2adist ]
+Compute the angular size distance given the redshift z.
+Cosmology parameters used are (Planck 2018): `H_0 = 67.4, Omega_M = 0.315, Omega_vac = 0.685`
+
+**Syntax:**
+`z2adist(z)`
+
+*z* `REAL` : redshift z;
+
+**Return value** (`DOUBLE`):
+Angular size distance in Mpc.
+
+```sql
+select z2adist(1.438) as D_A;
++-----------+
+| 1783.2688 |
++-----------+
+```
+
+
 ### [ z2ldist ]
 Compute the luminosity distance given the redshift z.
-Cosmology parameters used are: `H_o = 69.6, Omega_M = 0.286, Omega_vac = 0.714`
+Cosmology parameters used are (Planck 2018): `H_0 = 67.4, Omega_M = 0.315, Omega_vac = 0.685`
 
 **Syntax:**
 `z2ldist(z)`
@@ -107,9 +129,29 @@ Luminosity distance in Mpc.
 
 ```sql
 select z2ldist(1.438) as D_L;
-+-----------+
-| 10523.511 |
-+-----------+
++------------+
+| 10599.4711 |
++------------+
+```
+
+
+### [ z2ascl ]
+Compute the angular scale in kpc/arcsec at the given redshift z.
+Cosmology parameters used are (Planck 2018): `H_0 = 67.4, Omega_M = 0.315, Omega_vac = 0.685`
+
+**Syntax:**
+`z2ascl(z)`
+
+*z* `REAL` : redshift z;
+
+**Return value** (`DOUBLE`):
+Angular scale in arcsec/kpc.
+
+```sql
+select z2ascl(1.438) as scale;
++--------+
+| 8.6455 |
++--------+
 ```
 
 

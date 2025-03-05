@@ -104,7 +104,9 @@ double Conv_double(void* p, enum Item_result type)
 
 // External functions
 extern double skysep_h( double theta1, double phi1, double theta2, double phi2 );
+extern double z2ad( const float z );
 extern double z2ld( const float z );
+extern double z2ascale( const float z );
 extern int radec2GlGb( const double ra, const double dec, double *gl, double *gb );
 extern double radec2Gl( const double ra, const double dec );
 extern double radec2Gb( const double ra, const double dec );
