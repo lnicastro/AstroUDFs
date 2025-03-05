@@ -148,7 +148,7 @@ int main(int argc, char **argv)
 {
 
   double rmat[9];
-  double v1[3], v2[3], ra, de, lat, lon;
+  double v1[3], v2[3], ra=0., de=0., lat, lon;
   int i;
   char s[20];
 

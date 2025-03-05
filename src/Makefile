@@ -59,6 +59,9 @@ test_z2ld: test_z2ld.o $(LIB)
 test_z2ascale: test_z2ascale.o $(LIB)
 	$(LINK.c) -o $@ $@.o $(LIBS)
 
+test_ecl2000: test_ecl2000.o $(LIB)
+	$(LINK.c) -o $@ $@.o $(LIBS)
+
 test_pm: test_pm.o $(LIB)
 	$(LINK.c) -o $@ $@.o $(LIBS)
 
