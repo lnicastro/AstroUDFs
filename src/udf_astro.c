@@ -4,7 +4,7 @@
 To install:
 
 CREATE FUNCTION skysep RETURNS REAL SONAME 'udf_astro.so';
-CREATE FUNCTION z2lang RETURNS REAL SONAME 'udf_astro.so';
+CREATE FUNCTION z2adist RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION z2ldist RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION z2ascl RETURNS REAL SONAME 'udf_astro.so';
 CREATE FUNCTION ras2deg RETURNS REAL SONAME 'udf_astro.so';
