@@ -19,6 +19,7 @@ More to come. THIS IS WORK IN PROGESS!
 ## Compile and install
 
 ```shell
+cd src
 make
 sudo make install
 ```
