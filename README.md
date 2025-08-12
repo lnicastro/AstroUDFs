@@ -36,6 +36,7 @@ To import UDFs into MySQL (from the directory `sql`):
   shell> cd ../sql
   shell> mysql -u root -p
 
+  mysql> use mysql;
   mysql> source udfinstall.sql
 ```
 
